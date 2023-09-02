@@ -13,7 +13,7 @@ root.render(
             biography="Hi friends, i am a developer"
         />
         <Canvas
-            camera={{ position: [2, 0, 5] }}
+            camera={{ position: [1, 0, 5] }}
         >
             <Experience />
         </Canvas>
