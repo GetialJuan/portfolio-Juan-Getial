@@ -11,3 +11,12 @@ body,
 canvas{
     touch-action: none;
 }
+
+.infodiv{
+    position: absolute;
+    z-index: 1;
+}
+
+.name, .biography{
+    color: beige;
+}
