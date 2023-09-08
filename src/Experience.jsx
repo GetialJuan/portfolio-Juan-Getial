@@ -14,7 +14,7 @@ const Experience = ({ title, info }) => {
         boxRef.current.rotation.x += 1 * delta;
         torusRef.current.position.y = Math.sin(state.clock.getElapsedTime());
         torusRef.current.rotation.y = Math.cos(state.clock.getElapsedTime());
-        sphereRef.current.position.x = Math.sin(state.clock.getElapsedTime()) + 5;
+        sphereRef.current.position.y = Math.sin(state.clock.getElapsedTime());
     })
     return (
         <>
@@ -22,8 +22,8 @@ const Experience = ({ title, info }) => {
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={2} />
 
-            <mesh ref={coneRef} position={[3, 0, 0]}>
-                <coneGeometry args={[1, 3, 32]} />
+            <mesh ref={coneRef} position={[4.6, 0, -4]}>
+                <coneGeometry args={[1, 2, 15]} />
                 <meshStandardMaterial wireframe color={"green"} />
             </mesh>
 
@@ -32,12 +32,12 @@ const Experience = ({ title, info }) => {
                 <meshStandardMaterial color="red" />
             </mesh>
             
-            <mesh ref={torusRef} position={[-2, 0, -5]} rotation={[-Math.PI / 4, 0, 0]} scale={0.6}>
+            <mesh ref={torusRef} position={[-1.5, 0, -5]} rotation={[-Math.PI / 4, 0, 0]} scale={0.6}>
                 <torusGeometry args={[2, 1, 32, 64]} />
                 <meshStandardMaterial wireframe color="yellow" />
             </mesh>
 
-            <mesh ref={sphereRef} position-z={-10}>
+            <mesh ref={sphereRef} position={[3, -7, -10]}>
                 <sphereGeometry args={[2, 16, 32]} />
                 <meshToonMaterial color="purple" />
             </mesh>
