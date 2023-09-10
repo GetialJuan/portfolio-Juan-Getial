@@ -1,5 +1,6 @@
 import Geometries from "./components/Geometries/Geometries";
 import Cat from "./components/World/Cat";
+import Chest from "./components/World/Chest";
 
 
 const Experience = ({ title, info }) => {
@@ -10,7 +11,12 @@ const Experience = ({ title, info }) => {
 
             <Geometries />
 
-            <Cat />
+            <Chest scale={0.004}
+                position-z={0}
+                position={[0, 1]}
+                rotation-y={Math.PI * 1.8}/>
+
+                    <Cat />
         </>
     );
 }

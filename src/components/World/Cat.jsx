@@ -4,18 +4,12 @@ import { useEffect, useRef } from "react";
 const Cat = () => {
     const catRef = useRef();
     const catModel = useGLTF("/assets/models/cat/scene.gltf");
-    console.log("catModel")
-    console.log(catModel)
     const {animations} = catModel;
 
     const {actions} = useAnimations(animations, catRef);
-    console.log("actions mio")
-    console.log(actions);
 
     useEffect(() => {
         const action = actions["show_lc_001"]
-        console.log('action mio')
-        console.log(action)
         action.play()
     }, [])
 
