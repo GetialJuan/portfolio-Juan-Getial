@@ -34,7 +34,7 @@ export function Chest(props) {
                                         <skinnedMesh
                                             name="Object_12"
                                             geometry={nodes.Object_12.geometry}
-                                            material={woodenMaterial}
+                                            material={nodes.Object_12.material}
                                             skeleton={nodes.Object_12.skeleton}
                                         />
                                         <group

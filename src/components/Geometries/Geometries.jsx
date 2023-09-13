@@ -12,20 +12,20 @@ const Geometries = () => {
         coneRef.current.rotation.x += 1 * delta;
         coneRef.current.rotation.y += 1 * delta;
         boxRef.current.rotation.x += 1 * delta;
-        torusRef.current.position.y = Math.sin(state.clock.getElapsedTime()) - 2.5;
+        torusRef.current.position.y = Math.sin(state.clock.getElapsedTime()) + 2;
         torusRef.current.rotation.y = Math.cos(state.clock.getElapsedTime());
-        sphereRef.current.position.y = Math.sin(state.clock.getElapsedTime()) - 3;
+        sphereRef.current.position.y = Math.sin(state.clock.getElapsedTime()) + 3;
     })
     return (
         <>
             <OrbitControls makeDefault />
 
-            <mesh ref={coneRef} position={[4.6, -3, -4]}>
+            <mesh ref={coneRef} position={[-6, 2, -4]}>
                 <coneGeometry args={[1, 2, 15]} />
                 <meshStandardMaterial wireframe color={"green"} />
             </mesh>
 
-            <mesh ref={boxRef} position={[6, -2.5, -2]}>
+            <mesh ref={boxRef} position={[6, 2, -2]}>
                 <boxGeometry args={[1, 1, 1]} />
                 <meshStandardMaterial color="red" />
             </mesh>

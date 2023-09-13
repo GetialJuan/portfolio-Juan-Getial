@@ -1,6 +1,7 @@
 import Geometries from "./components/Geometries/Geometries";
 import Cat from "./components/World/Cat";
 import Chest from "./components/World/Chest";
+import Floor from "./components/World/Floor";
 
 
 const Experience = ({ title, info }) => {
@@ -8,6 +9,8 @@ const Experience = ({ title, info }) => {
         <>
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={2} />
+
+            <Floor />
 
             <Geometries />
 
