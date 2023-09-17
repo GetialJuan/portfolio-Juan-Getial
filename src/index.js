@@ -14,6 +14,7 @@ root.render(
         />
         <Canvas
             camera={{ position: [0, 0, 5], fov: 60 }}
+            shadows
         >
             <Experience />
         </Canvas>
