@@ -1,4 +1,3 @@
-import { OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
@@ -18,7 +17,6 @@ const Geometries = () => {
     })
     return (
         <>
-            <OrbitControls makeDefault />
 
             <mesh ref={coneRef} position={[2,-0.5, -4]}>
                 <coneGeometry args={[1, 2, 15]} />
