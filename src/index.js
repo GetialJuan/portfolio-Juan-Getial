@@ -10,10 +10,10 @@ root.render(
     <>
         <Info
             name="Juan Sebastian Getial"
-            biography="Hi friends, i am a developer"
+            biography="Hi friends, I am a developer"
         />
         <Canvas
-            camera={{ position: [0, 0, 5], fov: 60 }}
+            camera={{ position: [0, 3, 12], fov: 50 }}
             shadows
         >
             <Experience />
