@@ -1,32 +1,44 @@
 import React, { useRef, useState } from "react";
-import { Text, useGLTF } from "@react-three/drei";
+import { Center, Text, Text3D, useGLTF } from "@react-three/drei";
 
 const Gym = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/gym/gym_equipments.glb");
 
-  const AboutMe = (props) => {
-    const text = "I am a student at university ..."
-    return(
-      <Text
-        fontSize={0.5}
-        position={[-3, 0, 0]}
-      >
-        {text}
-      </Text>
+  const AboutMeText = (props) => {
+    const text = "About Me"
+    return (
+      <Center position={[-2.6,0,1]}>
+        <mesh
+          ref={aboutMeTextRef}
+          scale={0.4}
+        >
+          <Text3D
+            font='/assets/fonts/CaveatFont.json'
+          >
+            {text}
+            <meshBasicMaterial color={"red"} />
+          </Text3D>
+        </mesh>
+      </Center>
+
     )
   }
 
   const benchPressRef = useRef()
-  const [aboutMe, setAboutMe] = useState(false)
+  const aboutMeTextRef = useRef()
 
   const onPointerOverBenchPress = (e) => {
-    setAboutMe(true)
+    aboutMeTextRef.current.children[0].scale.addScalar(0.5)
+    aboutMeTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+  }
+  const onPointerOutBenchPress = (e) => {
+    aboutMeTextRef.current.children[0].scale.addScalar(-0.5)
+    aboutMeTextRef.current.children[0].material.color.setRGB(1, 0, 0)
   }
 
   return (
     <>
-      {aboutMe && <AboutMe />}
-
+      <AboutMeText />
       <group {...props} dispose={null}>
         <group scale={0.01}>
           <group
@@ -536,7 +548,7 @@ const Gym = (props) => {
 
             onPointerOver={(e) => onPointerOverBenchPress(e)
             }
-            onPointerOut={(e) => setAboutMe(false)}
+            onPointerOut={(e) => onPointerOutBenchPress(e)}
           />
           <mesh
             castShadow

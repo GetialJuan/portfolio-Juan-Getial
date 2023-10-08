@@ -5,10 +5,11 @@ import { SpotLightHelper } from "three";
 
 const Lights = () => {
     const spotLightRef = useRef();
-    useHelper(spotLightRef, SpotLightHelper);
 
     return (
         <>
+            <ambientLight intensity={0.5} />
+            <directionalLight castShadow position={[10, 10, 5]} intensity={2} />
             <spotLight
                 castShadow
                 ref={spotLightRef}
