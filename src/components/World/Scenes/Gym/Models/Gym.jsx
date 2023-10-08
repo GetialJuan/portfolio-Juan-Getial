@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Center, Text, Text3D, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { MathUtils, Vector2 } from "three";
 
 const Gym = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/gym/gym_equipments.glb");
@@ -7,7 +9,7 @@ const Gym = (props) => {
   const AboutMeText = (props) => {
     const text = "About Me"
     return (
-      <Center position={[-2.6,0,1]}>
+      <Center position={[-2.6, 0, 1]}>
         <mesh
           ref={aboutMeTextRef}
           scale={0.4}
@@ -27,6 +29,8 @@ const Gym = (props) => {
   const benchPressRef = useRef()
   const aboutMeTextRef = useRef()
 
+  const [benchPressScene, setBenchPressScene] = useState(true)
+
   const onPointerOverBenchPress = (e) => {
     aboutMeTextRef.current.children[0].scale.addScalar(0.5)
     aboutMeTextRef.current.children[0].material.color.setRGB(0, 1, 0)
@@ -35,6 +39,16 @@ const Gym = (props) => {
     aboutMeTextRef.current.children[0].scale.addScalar(-0.5)
     aboutMeTextRef.current.children[0].material.color.setRGB(1, 0, 0)
   }
+
+  const conClickBenchPress = (e) => {
+    setBenchPressScene(!benchPressScene)
+  }
+
+  useFrame((state) => {
+    state.camera.position.x = MathUtils.lerp(state.camera.position.x, benchPressScene ? 0 : 46, 0.03)
+    state.camera.position.z = MathUtils.lerp(state.camera.position.z, benchPressScene ? 12 : 1, 0.03)
+  })
+
 
   return (
     <>
@@ -549,6 +563,7 @@ const Gym = (props) => {
             onPointerOver={(e) => onPointerOverBenchPress(e)
             }
             onPointerOut={(e) => onPointerOutBenchPress(e)}
+            onClick={(e) => conClickBenchPress(e)}
           />
           <mesh
             castShadow

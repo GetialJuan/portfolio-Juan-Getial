@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 
-const Floor = () => {
+const Floor = (props) => {
 
     const PATH = "/assets/textures/wood/"
     const propsTexture = useTexture({
@@ -11,10 +11,12 @@ const Floor = () => {
     })
 
     return (
-        <mesh receiveShadow position-y={-2} rotation-x={-Math.PI / 2} >
-            <planeGeometry attach="geometry" args={[12, 12]} />
-            <meshStandardMaterial {...propsTexture} />
-        </mesh>
+        <group {...props}>
+            <mesh receiveShadow position-y={-2} rotation-x={-Math.PI / 2} >
+                <planeGeometry attach="geometry" args={[12, 12]} />
+                <meshStandardMaterial {...propsTexture} />
+            </mesh>
+        </group>
     );
 }
 
