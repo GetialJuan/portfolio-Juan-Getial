@@ -2,11 +2,14 @@ import React from 'react'
 import Floor from '../Gym/Models/Floor'
 import Wall from './Models/Wall'
 import Bench_press from './Models/Bench_press'
+import { RigidBody } from '@react-three/rapier'
 
 const Bench_press_scene = () => {
     return (
         <>
-            <Floor position-x={30} position-z={1} />
+            <RigidBody>
+                <Floor position-x={30} position-z={1} />
+            </RigidBody>
             <Wall
                 position-x={24}
                 rotation-y={1.6}
