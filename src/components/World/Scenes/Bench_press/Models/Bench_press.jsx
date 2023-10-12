@@ -38,8 +38,8 @@ const Bench_press = (props) => {
                 type="dynamic"
                 colliders="trimesh"
                 position={[0, 0.1, -44.012]}
-                onCollisionEnter={(e) => setDumbellSound(true)}
-                onCollisionExit={(e) => setDumbellSound(false)}
+                onCollisionEnter={(e) => setDumbellSound(false)}
+                //onCollisionExit={(e) => setDumbellSound(false)}
             >
                 <mesh
                     castShadow
@@ -64,6 +64,7 @@ const Bench_press = (props) => {
             y:1,
             z:0
         },true)
+        setDumbellSound(true)
     }
 
     useEffect(() =>{
@@ -74,8 +75,9 @@ const Bench_press = (props) => {
     useEffect(()=>{
         if(dumbellSound){
             dumbellSoundMp3.currentTime = 0;
-            dumbellSoundMp3.volume = Math.random();
+            dumbellSoundMp3.volume = 0.5;
             dumbellSoundMp3.play();
+            setDumbellSound(false)
         }
     },[dumbellSound])
 
