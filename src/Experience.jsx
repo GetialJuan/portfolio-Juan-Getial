@@ -8,7 +8,7 @@ const Experience = ({ title, info }) => {
         <>
             <Controls />
             <Gym_scene />
-            <Physics>
+            <Physics debug>
                 <Bench_press_scene />
             </Physics>
         </>
