@@ -27,7 +27,7 @@ const Barbell = (props) => {
             z:0
         },true)
 
-        
+        window.open('https://cum-ashen.vercel.app/')
     }
 
     // Audio efect
