@@ -43,14 +43,25 @@ const Gym = (props) => {
   }
 
   const conClickBenchPress = (e) => {
-    setMainScene(false)
     setSelectedScene('Bench_press_scene')
+    setMainScene(false)
+  }
+
+  const onClickDumbellsTable = (e) => {
+    setSelectedScene('Dumbell_scene')
+    setMainScene(false)
   }
 
   const getScenePosition = (scene) => {
     if (scene == 'Bench_press_scene'){
       return {
         x:42,
+        z:1
+      }
+    }
+    if (scene == 'Dumbell_scene'){
+      return {
+        x:-42,
         z:1
       }
     }
@@ -73,6 +84,8 @@ const Gym = (props) => {
       <AboutMeText />
       <group {...props} dispose={null}>
         <group scale={0.01}>
+
+          {/* Squeleton of Bench in the front */}
           <group
             position={[-116.317, 129.822, 77.359]}
             rotation={[-Math.PI / 2, 0.992, 0]}
@@ -98,6 +111,7 @@ const Gym = (props) => {
               material={materials["Material.003"]}
             />
           </group>
+          {/* Barbell of Bench in the front */}
           <group
             position={[-116.562, 132.798, 3.452]}
             scale={[1.802, 1.742, 111.907]}
@@ -115,6 +129,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Squeleton of Bench in the back */}
           <group
             position={[-579.234, 129.822, -203.116]}
             rotation={[-Math.PI / 2, 0.992, 0]}
@@ -139,6 +155,7 @@ const Gym = (props) => {
               material={materials["Material.003"]}
             />
           </group>
+          {/* BArbell of Bench Press in the Back */}
           <group
             position={[-579.479, 132.798, -277.023]}
             scale={[1.802, 1.742, 111.907]}
@@ -156,6 +173,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Each Dumbell of DumbellSet */}
           <group
             position={[-88.163, 169.888, -507.5]}
             rotation={[Math.PI / 2, 1.245, -Math.PI / 2]}
@@ -444,6 +463,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Bench plano */}
           <group
             position={[-99.23, -5.722, -371.903]}
             rotation={[0, Math.PI / 2, 0]}
@@ -462,6 +483,7 @@ const Gym = (props) => {
               material={materials["Material.002"]}
             />
           </group>
+          {/* Squeleton of bench plano */}
           <group
             position={[160.326, -5.722, -371.903]}
             rotation={[0, Math.PI / 2, 0]}
@@ -480,6 +502,8 @@ const Gym = (props) => {
               material={materials["Material.002"]}
             />
           </group>
+
+          {/* squeleton of disks rack */}
           <group
             position={[6.192, -5.722, -213.785]}
             rotation={[-Math.PI / 2, 0, Math.PI / 2]}
@@ -516,6 +540,7 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+          {/* dumbell of disk rack */}
           <group
             position={[-32.234, 132.798, -242.07]}
             scale={[1.802, 1.742, 26.761]}
@@ -567,7 +592,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
-          {/* Cojin Press de Banca */}
+
+          {/* Bench press in front */}
           <mesh
             ref={benchPressRef}
             castShadow
@@ -583,6 +609,8 @@ const Gym = (props) => {
             onPointerOut={(e) => onPointerOutBenchPress(e)}
             onClick={(e) => conClickBenchPress(e)}
           />
+
+          {/* Bench press in back */}
           <mesh
             castShadow
             receiveShadow
@@ -592,6 +620,8 @@ const Gym = (props) => {
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[58.716, 44.958, 7.182]}
           />
+          
+          {/* squeleton bench press in back */}
           <mesh
             castShadow
             receiveShadow
@@ -601,6 +631,8 @@ const Gym = (props) => {
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[3.744, 74.312, 3.642]}
           />
+          
+          {/* DumbellsTable */}
           <mesh
             castShadow
             receiveShadow
@@ -609,7 +641,9 @@ const Gym = (props) => {
             position={[-78.543, 68.297, -491.377]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[-7.407, 4.258, 79.024]}
+            onClick={(e) => onClickDumbellsTable(e)}
           />
+
           <mesh
             castShadow
             receiveShadow
