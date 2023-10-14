@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Center, Text, Text3D, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MathUtils, Vector2 } from "three";
+import { MainSceneContext } from "../../../../../Experience";
 
 const Gym = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/gym/gym_equipments.glb");
+  const {mainScene, setMainScene} = useContext(MainSceneContext)
 
   const AboutMeText = (props) => {
     const text = "About Me"
@@ -41,12 +43,12 @@ const Gym = (props) => {
   }
 
   const conClickBenchPress = (e) => {
-    setBenchPressScene(!benchPressScene)
+    setMainScene(false)
   }
 
   useFrame((state) => {
-    state.camera.position.x = MathUtils.lerp(state.camera.position.x, benchPressScene ? 0 : 46, 0.03)
-    state.camera.position.z = MathUtils.lerp(state.camera.position.z, benchPressScene ? 12 : 1, 0.03)
+    state.camera.position.x = MathUtils.lerp(state.camera.position.x, mainScene ? 0 : 46, 0.03)
+    state.camera.position.z = MathUtils.lerp(state.camera.position.z, mainScene ? 12 : 1, 0.03)
   })
 
 
