@@ -26,8 +26,7 @@ const Barbell = (props) => {
             y:0.5,
             z:0
         },true)
-
-        window.open('https://cum-ashen.vercel.app/')
+        setTimeout(() => window.open('https://cum-ashen.vercel.app/'), "1000")
     }
 
     // Audio efect
