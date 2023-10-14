@@ -31,7 +31,7 @@ const Gym = (props) => {
   const benchPressRef = useRef()
   const aboutMeTextRef = useRef()
 
-  const [benchPressScene, setBenchPressScene] = useState(true)
+  const [selectedScene, setSelectedScene] = useState()
 
   const onPointerOverBenchPress = (e) => {
     aboutMeTextRef.current.children[0].scale.addScalar(0.5)
@@ -44,11 +44,27 @@ const Gym = (props) => {
 
   const conClickBenchPress = (e) => {
     setMainScene(false)
+    setSelectedScene('Bench_press_scene')
+  }
+
+  const getScenePosition = (scene) => {
+    if (scene == 'Bench_press_scene'){
+      return {
+        x:42,
+        z:1
+      }
+    }
+    return {
+      x:0,
+      z:12
+    }
   }
 
   useFrame((state) => {
-    state.camera.position.x = MathUtils.lerp(state.camera.position.x, mainScene ? 0 : 46, 0.03)
-    state.camera.position.z = MathUtils.lerp(state.camera.position.z, mainScene ? 12 : 1, 0.03)
+    const {x,z} = getScenePosition(selectedScene) 
+
+    state.camera.position.x = MathUtils.lerp(state.camera.position.x, mainScene ? 0 : x, 0.03)
+    state.camera.position.z = MathUtils.lerp(state.camera.position.z, mainScene ? 12 : z, 0.03)
   })
 
 
