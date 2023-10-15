@@ -8,7 +8,7 @@ const SocratesText = () => {
             font='/assets/fonts/CaveatFont.ttf'
             textAlign='center'
             fontSize={0.5}
-            position={[-2, -1.95, 4]}
+            position={[-2-1, -1.95, 4]}
             rotation-x={-1.5702}
         >
             {text}
