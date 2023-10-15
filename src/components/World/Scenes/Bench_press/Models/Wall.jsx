@@ -9,7 +9,7 @@ const Wall = (props) => {
 
     return (
         <group {...props}>
-            <mesh receiveShadow >
+            <mesh receiveShadow onClick={(e) => e.stopPropagation()}>
                 <planeGeometry attach="geometry" args={[12, 12]} />
                 <meshStandardMaterial {...propsTexture} />
             </mesh>

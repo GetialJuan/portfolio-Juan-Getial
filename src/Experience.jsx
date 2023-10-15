@@ -7,7 +7,7 @@ import Dumbell_scene from "./components/World/Scenes/Dumbell/Dumbell_scene";
 
 export const MainSceneContext = createContext({
     mainScene: true,
-    setMainScene: () => {}
+    setMainScene: () => { }
 })
 
 const Experience = ({ title, info }) => {
@@ -24,8 +24,9 @@ const Experience = ({ title, info }) => {
                 <Gym_scene />
                 <Physics debug>
                     <Bench_press_scene />
+
+                    <Dumbell_scene />
                 </Physics>
-                <Dumbell_scene />
 
             </MainSceneContext.Provider>
         </>

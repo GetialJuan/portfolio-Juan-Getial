@@ -8,12 +8,12 @@ const Gym = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/gym/gym_equipments.glb");
   const {mainScene, setMainScene} = useContext(MainSceneContext)
 
-  const AboutMeText = (props) => {
-    const text = "About Me"
+  const CumProjectText = (props) => {
+    const text = "CUM Project"
     return (
       <Center position={[-2.6, 0, 1]}>
         <mesh
-          ref={aboutMeTextRef}
+          ref={cumProjectTextRef}
           scale={0.4}
         >
           <Text3D
@@ -28,18 +28,48 @@ const Gym = (props) => {
     )
   }
 
+  const CAFProjectText = (props) => {
+    const text = "CAF Project"
+    return (
+      <Center position={[2.6, 0.6, 1]}>
+        <mesh
+          scale={0.4}
+          ref={catProjectTextRef}
+        >
+          <Text3D
+            font='/assets/fonts/CaveatFont.json'
+          >
+            {text}
+            <meshBasicMaterial color={"red"} />
+          </Text3D>
+        </mesh>
+      </Center>
+
+    )
+  }
+
   const benchPressRef = useRef()
-  const aboutMeTextRef = useRef()
+  const cumProjectTextRef = useRef()
+  const catProjectTextRef = useRef()
 
   const [selectedScene, setSelectedScene] = useState()
 
   const onPointerOverBenchPress = (e) => {
-    aboutMeTextRef.current.children[0].scale.addScalar(0.5)
-    aboutMeTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+    cumProjectTextRef.current.children[0].scale.addScalar(0.5)
+    cumProjectTextRef.current.children[0].material.color.setRGB(0, 1, 0)
   }
   const onPointerOutBenchPress = (e) => {
-    aboutMeTextRef.current.children[0].scale.addScalar(-0.5)
-    aboutMeTextRef.current.children[0].material.color.setRGB(1, 0, 0)
+    cumProjectTextRef.current.children[0].scale.addScalar(-0.5)
+    cumProjectTextRef.current.children[0].material.color.setRGB(1, 0, 0)
+  }
+
+  const onPointerOverTableDumbells = (e) => {
+    catProjectTextRef.current.children[0].scale.addScalar(0.5)
+    catProjectTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+  }
+  const onPointerOutTableDumbells = (e) => {
+    catProjectTextRef.current.children[0].scale.addScalar(-0.5)
+    catProjectTextRef.current.children[0].material.color.setRGB(1, 0, 0)
   }
 
   const conClickBenchPress = (e) => {
@@ -81,7 +111,8 @@ const Gym = (props) => {
 
   return (
     <>
-      <AboutMeText />
+      <CumProjectText />
+      <CAFProjectText />
       <group {...props} dispose={null}>
         <group scale={0.01}>
 
@@ -642,6 +673,8 @@ const Gym = (props) => {
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[-7.407, 4.258, 79.024]}
             onClick={(e) => onClickDumbellsTable(e)}
+            onPointerEnter={(e) => onPointerOverTableDumbells(e)}
+            onPointerOut={(e) => onPointerOutTableDumbells(e)}
           />
 
           <mesh

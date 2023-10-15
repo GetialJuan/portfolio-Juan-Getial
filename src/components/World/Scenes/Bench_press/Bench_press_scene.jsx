@@ -5,7 +5,7 @@ import { RigidBody } from '@react-three/rapier'
 import Barbell from './Models/Barbell'
 import Bench from './Models/Bench'
 import MotivationalText from './Text/MotivationalText'
-import Info_text from './Text/Project_text'
+import Info_text from './Text/Info_text'
 
 const Bench_press_scene = () => {
 
