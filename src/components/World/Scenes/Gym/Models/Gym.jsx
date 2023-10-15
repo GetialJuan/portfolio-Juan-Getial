@@ -8,12 +8,12 @@ const Gym = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/gym/gym_equipments.glb");
   const {mainScene, setMainScene} = useContext(MainSceneContext)
 
-  const AboutMeText = (props) => {
-    const text = "About Me"
+  const CumProjectText = (props) => {
+    const text = "CUM Project"
     return (
       <Center position={[-2.6, 0, 1]}>
         <mesh
-          ref={aboutMeTextRef}
+          ref={cumProjectTextRef}
           scale={0.4}
         >
           <Text3D
@@ -28,35 +28,95 @@ const Gym = (props) => {
     )
   }
 
-  const benchPressRef = useRef()
-  const aboutMeTextRef = useRef()
+  const CAFProjectText = (props) => {
+    const text = "CAF Project"
+    return (
+      <Center position={[2.6, 0.6, 1]}>
+        <mesh
+          scale={0.4}
+          ref={catProjectTextRef}
+        >
+          <Text3D
+            font='/assets/fonts/CaveatFont.json'
+          >
+            {text}
+            <meshBasicMaterial color={"red"} />
+          </Text3D>
+        </mesh>
+      </Center>
 
-  const [benchPressScene, setBenchPressScene] = useState(true)
+    )
+  }
+
+  const benchPressRef = useRef()
+  const cumProjectTextRef = useRef()
+  const catProjectTextRef = useRef()
+
+  const [selectedScene, setSelectedScene] = useState()
 
   const onPointerOverBenchPress = (e) => {
-    aboutMeTextRef.current.children[0].scale.addScalar(0.5)
-    aboutMeTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+    cumProjectTextRef.current.children[0].scale.addScalar(0.5)
+    cumProjectTextRef.current.children[0].material.color.setRGB(0, 1, 0)
   }
   const onPointerOutBenchPress = (e) => {
-    aboutMeTextRef.current.children[0].scale.addScalar(-0.5)
-    aboutMeTextRef.current.children[0].material.color.setRGB(1, 0, 0)
+    cumProjectTextRef.current.children[0].scale.addScalar(-0.5)
+    cumProjectTextRef.current.children[0].material.color.setRGB(1, 0, 0)
+  }
+
+  const onPointerOverTableDumbells = (e) => {
+    catProjectTextRef.current.children[0].scale.addScalar(0.5)
+    catProjectTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+  }
+  const onPointerOutTableDumbells = (e) => {
+    catProjectTextRef.current.children[0].scale.addScalar(-0.5)
+    catProjectTextRef.current.children[0].material.color.setRGB(1, 0, 0)
   }
 
   const conClickBenchPress = (e) => {
+    setSelectedScene('Bench_press_scene')
     setMainScene(false)
   }
 
+  const onClickDumbellsTable = (e) => {
+    setSelectedScene('Dumbell_scene')
+    setMainScene(false)
+  }
+
+  const getScenePosition = (scene) => {
+    if (scene == 'Bench_press_scene'){
+      return {
+        x:42,
+        z:1
+      }
+    }
+    if (scene == 'Dumbell_scene'){
+      return {
+        x:-42,
+        z:1
+      }
+    }
+    return {
+      x:0,
+      z:12
+    }
+  }
+
   useFrame((state) => {
-    state.camera.position.x = MathUtils.lerp(state.camera.position.x, mainScene ? 0 : 46, 0.03)
-    state.camera.position.z = MathUtils.lerp(state.camera.position.z, mainScene ? 12 : 1, 0.03)
+    const {x,z} = getScenePosition(selectedScene) 
+
+    state.camera.position.x = MathUtils.lerp(state.camera.position.x, mainScene ? 0 : x, 0.03)
+    state.camera.position.z = MathUtils.lerp(state.camera.position.z, mainScene ? 12 : z, 0.03)
   })
 
 
   return (
     <>
-      <AboutMeText />
+      <CumProjectText />
+      <CAFProjectText />
       <group {...props} dispose={null}>
         <group scale={0.01}>
+
+          {/* Squeleton of Bench in the front */}
           <group
             position={[-116.317, 129.822, 77.359]}
             rotation={[-Math.PI / 2, 0.992, 0]}
@@ -82,6 +142,7 @@ const Gym = (props) => {
               material={materials["Material.003"]}
             />
           </group>
+          {/* Barbell of Bench in the front */}
           <group
             position={[-116.562, 132.798, 3.452]}
             scale={[1.802, 1.742, 111.907]}
@@ -99,6 +160,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Squeleton of Bench in the back */}
           <group
             position={[-579.234, 129.822, -203.116]}
             rotation={[-Math.PI / 2, 0.992, 0]}
@@ -123,6 +186,7 @@ const Gym = (props) => {
               material={materials["Material.003"]}
             />
           </group>
+          {/* BArbell of Bench Press in the Back */}
           <group
             position={[-579.479, 132.798, -277.023]}
             scale={[1.802, 1.742, 111.907]}
@@ -140,6 +204,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Each Dumbell of DumbellSet */}
           <group
             position={[-88.163, 169.888, -507.5]}
             rotation={[Math.PI / 2, 1.245, -Math.PI / 2]}
@@ -428,6 +494,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+
+          {/* Bench plano */}
           <group
             position={[-99.23, -5.722, -371.903]}
             rotation={[0, Math.PI / 2, 0]}
@@ -446,6 +514,7 @@ const Gym = (props) => {
               material={materials["Material.002"]}
             />
           </group>
+          {/* Squeleton of bench plano */}
           <group
             position={[160.326, -5.722, -371.903]}
             rotation={[0, Math.PI / 2, 0]}
@@ -464,6 +533,8 @@ const Gym = (props) => {
               material={materials["Material.002"]}
             />
           </group>
+
+          {/* squeleton of disks rack */}
           <group
             position={[6.192, -5.722, -213.785]}
             rotation={[-Math.PI / 2, 0, Math.PI / 2]}
@@ -500,6 +571,7 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
+          {/* dumbell of disk rack */}
           <group
             position={[-32.234, 132.798, -242.07]}
             scale={[1.802, 1.742, 26.761]}
@@ -551,7 +623,8 @@ const Gym = (props) => {
               material={materials["Material.006"]}
             />
           </group>
-          {/* Cojin Press de Banca */}
+
+          {/* Bench press in front */}
           <mesh
             ref={benchPressRef}
             castShadow
@@ -567,6 +640,8 @@ const Gym = (props) => {
             onPointerOut={(e) => onPointerOutBenchPress(e)}
             onClick={(e) => conClickBenchPress(e)}
           />
+
+          {/* Bench press in back */}
           <mesh
             castShadow
             receiveShadow
@@ -576,6 +651,8 @@ const Gym = (props) => {
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[58.716, 44.958, 7.182]}
           />
+          
+          {/* squeleton bench press in back */}
           <mesh
             castShadow
             receiveShadow
@@ -585,6 +662,8 @@ const Gym = (props) => {
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[3.744, 74.312, 3.642]}
           />
+          
+          {/* DumbellsTable */}
           <mesh
             castShadow
             receiveShadow
@@ -593,7 +672,11 @@ const Gym = (props) => {
             position={[-78.543, 68.297, -491.377]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[-7.407, 4.258, 79.024]}
+            onClick={(e) => onClickDumbellsTable(e)}
+            onPointerEnter={(e) => onPointerOverTableDumbells(e)}
+            onPointerOut={(e) => onPointerOutTableDumbells(e)}
           />
+
           <mesh
             castShadow
             receiveShadow
