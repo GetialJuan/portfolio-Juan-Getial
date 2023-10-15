@@ -48,9 +48,30 @@ const Gym = (props) => {
     )
   }
 
+  const LinkedinText = (props) => {
+    const text = "My Linkedin"
+    return (
+      <Center position={[-0.3, 0.2, -5]}>
+        <mesh
+          scale={0.5}
+          ref={linkedinTextRef}
+        >
+          <Text3D
+            font='/assets/fonts/CaveatFont.json'
+          >
+            {text}
+            <meshBasicMaterial color={"red"} />
+          </Text3D>
+        </mesh>
+      </Center>
+
+    )
+  }
+
   const benchPressRef = useRef()
   const cumProjectTextRef = useRef()
   const catProjectTextRef = useRef()
+  const linkedinTextRef = useRef()
 
   const [selectedScene, setSelectedScene] = useState()
 
@@ -72,6 +93,15 @@ const Gym = (props) => {
     catProjectTextRef.current.children[0].material.color.setRGB(1, 0, 0)
   }
 
+  const onPointerOverBenchPressBack = (e) => {
+    linkedinTextRef.current.children[0].scale.addScalar(0.5)
+    linkedinTextRef.current.children[0].material.color.setRGB(0, 1, 0)
+  }
+  const onPointerOutBenchPressBack = (e) => {
+    linkedinTextRef.current.children[0].scale.addScalar(-0.5)
+    linkedinTextRef.current.children[0].material.color.setRGB(1, 0, 0)
+  }
+
   const conClickBenchPress = (e) => {
     setSelectedScene('Bench_press_scene')
     setMainScene(false)
@@ -80,6 +110,10 @@ const Gym = (props) => {
   const onClickDumbellsTable = (e) => {
     setSelectedScene('Dumbell_scene')
     setMainScene(false)
+  }
+
+  const onClickBenchPressBack = (e) => {
+    window.open('https://www.linkedin.com/in/juan-getial-getial-832852284/')
   }
 
   const getScenePosition = (scene) => {
@@ -113,6 +147,7 @@ const Gym = (props) => {
     <>
       <CumProjectText />
       <CAFProjectText />
+      <LinkedinText />
       <group {...props} dispose={null}>
         <group scale={0.01}>
 
@@ -650,6 +685,9 @@ const Gym = (props) => {
             position={[-396.196, 50.58, -282.658]}
             rotation={[-Math.PI / 2, 0, 0]}
             scale={[58.716, 44.958, 7.182]}
+            onPointerOver={(e) => onPointerOverBenchPressBack(e)}
+            onPointerOut={(e) => onPointerOutBenchPressBack(e)}
+            onClick={(e) => onClickBenchPressBack(e)}
           />
           
           {/* squeleton bench press in back */}
