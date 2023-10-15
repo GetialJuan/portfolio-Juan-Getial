@@ -72,8 +72,9 @@ const Dumbell_scene = () => {
       <group
         onClick={(e) => handleClickDumbell(e)}
       >
-        {dumbells.map((dumbell) =>
+        {dumbells.map((dumbell, key) =>
           <Dumbell
+            key={key}
             position={dumbell}
           />
         )}
