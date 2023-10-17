@@ -22,7 +22,7 @@ const Experience = ({ title, info }) => {
             }}>
 
                 <Gym_scene />
-                <Physics debug>
+                <Physics >
                     <Bench_press_scene />
 
                     <Dumbell_scene />
